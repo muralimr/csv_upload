@@ -13,4 +13,5 @@ class ProductController < ApplicationController
 	    render json: @product
   	
   end
+
 end
