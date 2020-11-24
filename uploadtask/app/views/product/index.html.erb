@@ -1,0 +1,6 @@
+<%= form_tag product_index_path, multipart: true do %>
+
+<%= file_field_tag :file, required: true %>
+<%= submit_tag "Import" %>
+
+<% end %>
