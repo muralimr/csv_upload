@@ -7,11 +7,22 @@ class NewsController < ApplicationController
 
 
   def get_api_data
-  	@dat_fetch = Net::HTTP.get(URI.parse("https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=0a708bae59cd4f92b26a6bc4c114f1f0"))
+      url = "https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=0a708bae59cd4f92b26a6bc4c114f1f0"
+      resp = Net::HTTP.get_response(URI.parse(url))
+      data = JSON.parse(resp.body)
 
-  	@dat_fetch[:articles].each do |l|
-  		News.create(source: l.source, author: l.author, title: l.title, description: l.description, url: l.url, urlToImage: l.urlToImage, publishedAt: l.publishedAt, content: l.content)
-  	end
+      data["articles"].each do |i|
+      
+     News.create(source: i["source"], author: i["author"], title: i["title"], description: i["description"], url: i["url"], urlToImage: i["urlToImage"], publishedAt: i["publishedAt"], content: i["content"])
+      
+        end
+      render json: data["articles"]
+
 
   end
+
+
+
+
+
 end

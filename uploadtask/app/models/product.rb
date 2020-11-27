@@ -5,6 +5,8 @@ class Product < ApplicationRecord
 
 	
 
+      scope :is_active, -> { where("status::integer = 1") }
+
 	before_save :generate_timestamp
 
 	require 'csv'

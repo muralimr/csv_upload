@@ -9,7 +9,7 @@ class ProductController < ApplicationController
   end
 
   def get_products
-  	   @product = Product.all
+  	   @product = Product.is_active
 	    render json: @product
   	
   end
